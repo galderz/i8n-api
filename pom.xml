@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>i8n</groupId>
+   <artifactId>i8n-api-parent</artifactId>
+   <version>1.0-SNAPSHOT</version>
+
+   <packaging>pom</packaging>
+
+   <description>
+   Some rules for consistency:
+   - API/impl versions, e.g. v1, v2...etc, should only used in artifact and package names, not in class names.
+   </description>
+
+   <properties>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+   </properties>
+
+   <modules>
+      <module>common</module>
+      <module>map/map-common</module>
+      <module>map/map-v1</module>
+      <module>map/map-v1-impl-embedded</module>
+      <module>map/map-v1-impl-remote</module>
+      <module>map/map-v2</module>
+      <module>use-cases</module>
+   </modules>
+
+</project>
