@@ -2,12 +2,12 @@ package usecase;
 
 import i8n.api.common.Infinispan;
 import i8n.api.map.v1.ApiMap;
-import i8n.api.map.v1.Map;
+import i8n.api.map.v1.DummyMap;
 
-public class AnyMapEmbeddedUseCase {
+public class AnyMapV1RemoteUseCase {
 
    public static void main(String[] args) {
-      final Map<Integer, String> map = Infinispan.get(
+      final DummyMap<Integer, String> map = Infinispan.get(
          ApiMap.instance(), new Object()
       );
 

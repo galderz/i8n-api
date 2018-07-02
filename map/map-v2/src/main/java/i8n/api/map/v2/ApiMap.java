@@ -1,4 +1,4 @@
-package i8n.api.map.v1;
+package i8n.api.map.v2;
 
 import i8n.api.common.Api;
 
