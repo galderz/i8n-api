@@ -3,14 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <parent>
-      <artifactId>i8n-api-parent</artifactId>
+      <artifactId>use-cases</artifactId>
       <groupId>i8n</groupId>
       <version>1.0-SNAPSHOT</version>
-      <relativePath>../../pom.xml</relativePath>
    </parent>
    <modelVersion>4.0.0</modelVersion>
 
-   <artifactId>i8n-api-map-v1-impl-remote</artifactId>
+   <artifactId>any-map-remote</artifactId>
+
+   <description>
+   This use case represents a user that wants to interact with Infinispan using the Map api.
+   It provides remote implementation as dependency to connect to a remote Infinispan server.
+   The user might want to use embedded implementation with the same API.
+   That can be achieved simply by changing the dependency, no further changes should be required.
+   </description>
 
    <dependencies>
       <dependency>
@@ -18,12 +24,10 @@
          <artifactId>i8n-api-map-v1</artifactId>
          <version>1.0-SNAPSHOT</version>
       </dependency>
-
       <dependency>
-         <groupId>org.kohsuke.metainf-services</groupId>
-         <artifactId>metainf-services</artifactId>
-         <version>1.7</version>
-         <optional>true</optional>
+         <groupId>i8n</groupId>
+         <artifactId>i8n-api-map-v1-impl-remote</artifactId>
+         <version>1.0-SNAPSHOT</version>
       </dependency>
    </dependencies>
 

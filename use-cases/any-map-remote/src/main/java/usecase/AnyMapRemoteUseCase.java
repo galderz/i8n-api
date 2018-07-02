@@ -4,7 +4,7 @@ import i8n.api.common.Infinispan;
 import i8n.api.map.v1.ApiMap;
 import i8n.api.map.v1.Map;
 
-public class AnyMapEmbeddedUseCase {
+public class AnyMapRemoteUseCase {
 
    public static void main(String[] args) {
       final Map<Integer, String> map = Infinispan.get(
