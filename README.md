@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/galderz/i8n-api.svg?branch=master)](https://travis-ci.com/galderz/i8n-api)
+
 Some rules for consistency:
 
 * API/impl versions, e.g. v1, v2...etc, should only used in artifact and package names, not in class names.
