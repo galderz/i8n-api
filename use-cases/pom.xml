@@ -16,6 +16,7 @@
       <module>any-map-v1-embedded</module>
       <module>any-map-v1-remote</module>
       <module>any-map-v2-embedded</module>
+      <module>any-map-v2-remote</module>
    </modules>
 
    <dependencies>
