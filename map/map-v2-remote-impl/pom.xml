@@ -10,12 +10,12 @@
    </parent>
    <modelVersion>4.0.0</modelVersion>
 
-   <artifactId>i8n-api-map-v1-impl-remote</artifactId>
+   <artifactId>i8n-api-map-v2-remote-impl</artifactId>
 
    <dependencies>
       <dependency>
          <groupId>i8n</groupId>
-         <artifactId>i8n-api-map-v1</artifactId>
+         <artifactId>i8n-api-map-v2</artifactId>
          <version>1.0-SNAPSHOT</version>
       </dependency>
 

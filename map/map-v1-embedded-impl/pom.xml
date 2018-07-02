@@ -10,7 +10,7 @@
    </parent>
    <modelVersion>4.0.0</modelVersion>
 
-   <artifactId>i8n-api-map-v1-impl-embedded</artifactId>
+   <artifactId>i8n-api-map-v1-embedded-impl</artifactId>
 
    <dependencies>
       <dependency>

@@ -19,11 +19,11 @@
       <module>common</module>
       <module>map/map-common</module>
       <module>map/map-v1</module>
-      <module>map/map-v1-impl-embedded</module>
-      <module>map/map-v1-impl-remote</module>
+      <module>map/map-v1-embedded-impl</module>
+      <module>map/map-v1-remote-impl</module>
       <module>map/map-v2</module>
-      <module>map/map-v2-impl-embedded</module>
-      <module>map/map-v2-impl-remote</module>
+      <module>map/map-v2-embedded-impl</module>
+      <module>map/map-v2-remote-impl</module>
       <module>use-cases</module>
    </modules>
 
