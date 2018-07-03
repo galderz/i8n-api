@@ -24,6 +24,8 @@
       <module>map/map-v2</module>
       <module>map/map-v2-embedded-impl</module>
       <module>map/map-v2-remote-impl</module>
+      <module>map/map-v3-embedded</module>
+      <module>map/map-v3-embedded-impl</module>
       <module>use-cases</module>
    </modules>
 

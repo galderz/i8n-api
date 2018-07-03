@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+      <artifactId>i8-api-use-cases</artifactId>
+      <groupId>i8n</groupId>
+      <version>1.0-SNAPSHOT</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+
+   <artifactId>i8-api-use-case-map-v3-embedded</artifactId>
+
+   <description>
+   This use case represents a user that wants to interact with Infinispan using version 3 of the Map api.
+   This API only allows an embedded implementation.
+   User code that interacts with this API cannot be interchanged with a remote implementation,
+   </description>
+
+   <dependencies>
+      <dependency>
+         <groupId>i8n</groupId>
+         <artifactId>i8n-api-map-v3-embedded</artifactId>
+         <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+         <groupId>i8n</groupId>
+         <artifactId>i8n-api-map-v3-embedded-impl</artifactId>
+         <version>1.0-SNAPSHOT</version>
+      </dependency>
+   </dependencies>
+
+</project>

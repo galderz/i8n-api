@@ -14,7 +14,10 @@ However, with Java 8 and 'default' keyword, any method can be added without affe
 
 * Changing return type, number of parameters or type of parameters. 
 
-Dummy APIs demonstrated:
+All APIs names start with `Dummy` to make it clear that these are just dummy examples of potential APIs.
+They are not intended as final API products, but just as examples. 
+
+Dummy APIs explained:
 
 * DummyMap v1 is a location-independent, key/value API with put returning previous value associated with key.
 Most of the time, users want to store a value but don't care about previous value.
@@ -26,4 +29,6 @@ This was an actual mistake we made in the original Infinispan API.
 We want the users to continue using `put()` since that's the most idiomatic way to simply store a value.
 This is better than getting those users to use a different method that stores a value but does not return previous value.
 Changing the return value is an incompatible API change, so instead let's move those users to a new API version.
- 
+
+* DummyMap v3 is an embedded-only API that offers a extra Java lambda-based operation.
+It is designed as embedded-only is because there's no easy way to transform Java lambdas into functions in other languages.
