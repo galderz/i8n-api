@@ -13,6 +13,8 @@
    <artifactId>i8-api-use-cases</artifactId>
 
    <modules>
+      <module>any-map-async-v1-embedded</module>
+      <module>any-map-async-v1-remote</module>
       <module>any-map-v1-embedded</module>
       <module>any-map-v1-remote</module>
       <module>any-map-v2-embedded</module>

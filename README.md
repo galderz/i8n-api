@@ -32,3 +32,11 @@ Changing the return value is an incompatible API change, so instead let's move t
 
 * DummyMap v3 is an embedded-only API that offers a extra Java lambda-based operation.
 It is designed as embedded-only is because there's no easy way to transform Java lambdas into functions in other languages.
+
+TODO
+
+- [X] Async Map API - CompletionStage
+- [ ] Async Map API - Publisher
+- [ ] Rx Map API 
+- [ ] Query API
+- [ ] Counter API
