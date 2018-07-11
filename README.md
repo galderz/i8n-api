@@ -33,10 +33,19 @@ Changing the return value is an incompatible API change, so instead let's move t
 * DummyMap v3 is an embedded-only API that offers a extra Java lambda-based operation.
 It is designed as embedded-only is because there's no easy way to transform Java lambdas into functions in other languages.
 
+* DummyAsyncMap v1 is a location-independent, async-only API.
+Barring reactivestreams dependency (which is part of Java 9), it has no other dependencies.
+This means that it offers an async API that works for both operations with single or multiple returns without external dependencies.
+Higher level async-only APIs, such as Rx, would build on top of this API.
+Those users interested in using async APIs are often interested in using them exclusive.
+That is, they don't want to mix up up sync and async APIs.
+This is why the API is standalone and independent from the sync APIs.
+One example user here would be Vert.x.
+
 TODO
 
 - [X] Async Map API - CompletionStage
-- [ ] Async Map API - Publisher
+- [X] Async Map API - Publisher
 - [ ] Rx Map API 
 - [ ] Query API
 - [ ] Counter API
