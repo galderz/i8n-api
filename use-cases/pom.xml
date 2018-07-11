@@ -13,22 +13,16 @@
    <artifactId>i8-api-use-cases</artifactId>
 
    <modules>
+      <module>any-map-async-v1</module>
       <module>any-map-async-v1-embedded</module>
       <module>any-map-async-v1-remote</module>
+      <module>any-map-v1</module>
       <module>any-map-v1-embedded</module>
       <module>any-map-v1-remote</module>
+      <module>any-map-v2</module>
       <module>any-map-v2-embedded</module>
       <module>any-map-v2-remote</module>
       <module>map-v3-embedded</module>
    </modules>
-
-   <dependencies>
-      <dependency>
-         <groupId>junit</groupId>
-         <artifactId>junit</artifactId>
-         <version>4.12</version>
-         <scope>test</scope>
-      </dependency>
-   </dependencies>
 
 </project>

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class AnyAsyncMapV1EmbeddedTest {
+public class AnyAsyncMapV1Test {
 
    @Test
    public void test000() {
@@ -37,9 +37,9 @@ public class AnyAsyncMapV1EmbeddedTest {
 
       final CompletionStage<Void> events = get1.thenAccept(x -> {
          assertEquals(
-         "[map-async-v1-embedded] PUT key=1,value=Bulbasaur\n" +
-            "[map-async-v1-embedded] PUT key=4,value=Charmander\n" +
-            "[map-async-v1-embedded] GET key=1"
+            "[" + map.getName() + "] PUT key=1,value=Bulbasaur\n" +
+            "[" + map.getName() + "] PUT key=4,value=Charmander\n" +
+            "[" + map.getName() + "] GET key=1"
             , map.toString()
          );
       });
@@ -73,14 +73,14 @@ public class AnyAsyncMapV1EmbeddedTest {
 
       final CompletionStage<Void> events = getMany.thenAccept(x -> {
          assertEquals(
-            "[map-async-v1-embedded] PUT_MANY entry=7=Squirtle\n" +
-               "[map-async-v1-embedded] PUT_MANY entry=8=Wartortle\n" +
-               "[map-async-v1-embedded] PUT_MANY entry=9=Blastoise\n" +
-               "[map-async-v1-embedded] PUT_MANY complete\n" +
-               "[map-async-v1-embedded] GET_MANY key=7\n" +
-               "[map-async-v1-embedded] GET_MANY key=8\n" +
-               "[map-async-v1-embedded] GET_MANY key=9\n" +
-               "[map-async-v1-embedded] GET_MANY complete"
+            "[" + map.getName() + "] PUT_MANY entry=7=Squirtle\n" +
+            "[" + map.getName() + "] PUT_MANY entry=8=Wartortle\n" +
+            "[" + map.getName() + "] PUT_MANY entry=9=Blastoise\n" +
+            "[" + map.getName() + "] PUT_MANY complete\n" +
+            "[" + map.getName() + "] GET_MANY key=7\n" +
+            "[" + map.getName() + "] GET_MANY key=8\n" +
+            "[" + map.getName() + "] GET_MANY key=9\n" +
+            "[" + map.getName() + "] GET_MANY complete"
             , map.toString()
          );
       });

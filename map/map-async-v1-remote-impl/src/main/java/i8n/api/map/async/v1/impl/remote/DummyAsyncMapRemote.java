@@ -73,6 +73,11 @@ public class DummyAsyncMapRemote<K, V> implements DummyAsyncMap<K, V> {
    }
 
    @Override
+   public String getName() {
+      return "map-async-v1-remote";
+   }
+
+   @Override
    public String toString() {
       return queue.stream().collect(Collectors.joining("\n"));
    }

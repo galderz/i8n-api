@@ -9,4 +9,9 @@ public interface DummyMap<K, V> {
     */
    V put(K key, V value);
 
+   /**
+    * Name of map
+    */
+   String getName();
+
 }

@@ -73,17 +73,13 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
    }
 
    @Override
-   public String toString() {
-      return queue.stream().collect(Collectors.joining("\n"));
+   public String getName() {
+      return "map-async-v1-embedded";
    }
 
-   private static final class DummyPublisher<T> implements Publisher<T> {
-
-      @Override
-      public void subscribe(Subscriber<? super T> s) {
-         // TODO: Customise this generated block
-      }
-
+   @Override
+   public String toString() {
+      return queue.stream().collect(Collectors.joining("\n"));
    }
 
 }

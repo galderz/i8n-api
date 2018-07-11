@@ -14,4 +14,9 @@ public interface DummyMap<K, V> {
     */
    V getAndPut(K key, V value);
 
+   /**
+    * Name of map
+    */
+   String getName();
+
 }

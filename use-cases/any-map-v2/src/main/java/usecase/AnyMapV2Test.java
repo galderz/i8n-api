@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AnyMapV2RemoteTest {
+public class AnyMapV2Test {
 
    @Test
    public void test000() {
@@ -21,10 +21,10 @@ public class AnyMapV2RemoteTest {
       map.getAndPut(7, "Squirtle");
 
       assertEquals(
-         "[map-v2-remote] PUT key=1,value=Bulbasaur\n" +
-         "[map-v2-remote] PUT key=4,value=Charmander\n" +
-         "[map-v2-remote] GET key=1\n" +
-         "[map-v2-remote] GET_PUT key=7,value=Squirtle"
+      "[" + map.getName() + "] PUT key=1,value=Bulbasaur\n" +
+         "[" + map.getName() + "] PUT key=4,value=Charmander\n" +
+         "[" + map.getName() + "] GET key=1\n" +
+         "[" + map.getName() + "] GET_PUT key=7,value=Squirtle"
          , map.toString()
       );
    }

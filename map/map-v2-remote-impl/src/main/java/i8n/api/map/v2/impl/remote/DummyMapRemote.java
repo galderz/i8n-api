@@ -28,6 +28,11 @@ public class DummyMapRemote<K, V> implements DummyMap<K, V> {
    }
 
    @Override
+   public String getName() {
+      return "map-v2-remote";
+   }
+
+   @Override
    public String toString() {
       return queue.stream().collect(Collectors.joining("\n"));
    }
