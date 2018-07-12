@@ -16,6 +16,8 @@
    It provides remote implementation as dependency to connect to a remote Infinispan server.
    The user might want to use embedded implementation with the same API.
    That can be achieved simply by changing the dependency, no further changes should be required.
+   Asynchronous API users are often interested in using purely async APIs.
+   In other words, they have no interest in synchronous APIs, so these are no accessible via the async map dependency.
    </description>
 
    <dependencies>
