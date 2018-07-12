@@ -1,18 +1,22 @@
 package usecase;
 
 import i8n.api.common.Infinispan;
-import i8n.api.map.async.v1.ApiMap;
+import i8n.api.map.async.v1.ApiAsyncMap;
 import i8n.api.map.async.v1.DummyAsyncMap;
 import i8n.api.map.async.v1.JoiningCompletionStage;
 import i8n.api.map.async.v1.TestPublisher;
+import i8n.api.map.async.v1.TestSubscriber;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
 
 import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
 
 public class AnyAsyncMapV1Test {
@@ -20,7 +24,7 @@ public class AnyAsyncMapV1Test {
    @Test
    public void test000() {
       final DummyAsyncMap<Integer, String> map = Infinispan.get(
-         ApiMap.instance(), new Object()
+         ApiAsyncMap.instance(), new Object()
       );
 
       // Execute put...
@@ -36,6 +40,7 @@ public class AnyAsyncMapV1Test {
          put2.thenCompose(x -> map.get(1));
 
       final CompletionStage<Void> events = get1.thenAccept(x -> {
+         assertEquals("Bulbasaur", x);
          assertEquals(
             "[" + map.getName() + "] PUT key=1,value=Bulbasaur\n" +
             "[" + map.getName() + "] PUT key=4,value=Charmander\n" +
@@ -52,7 +57,7 @@ public class AnyAsyncMapV1Test {
    @Test
    public void test001() {
       final DummyAsyncMap<Integer, String> map = Infinispan.get(
-         ApiMap.instance(), new Object()
+         ApiAsyncMap.instance(), new Object()
       );
 
       final Publisher<Map.Entry<Integer, String>> values = TestPublisher
@@ -64,14 +69,24 @@ public class AnyAsyncMapV1Test {
 
       final CompletionStage<Void> putMany = map.putMany(values);
 
-      final CompletionStage<Void> getMany = putMany.thenAccept(x -> {
+      final CompletionStage<Publisher<String>> getMany = putMany.thenApply(x -> {
          final Publisher<Integer> keys = TestPublisher
             .fromArray(7, 8, 9);
 
-         map.getMany(keys);
+         return map.getMany(keys);
       });
 
-      final CompletionStage<Void> events = getMany.thenAccept(x -> {
+      final CompletionStage<Void> assertions = getMany.thenAccept(result -> {
+         TestSubscriber<String> observer = new TestSubscriber<>();
+         result.subscribe(observer);
+
+         observer.awaitTerminalEvent(2, SECONDS);
+         observer.assertNoErrors();
+         observer.assertComplete();
+         observer.assertValueSet(
+            Arrays.asList("Squirtle", "Wartortle", "Blastoise")
+         );
+
          assertEquals(
             "[" + map.getName() + "] PUT_MANY entry=7=Squirtle\n" +
             "[" + map.getName() + "] PUT_MANY entry=8=Wartortle\n" +
@@ -86,7 +101,7 @@ public class AnyAsyncMapV1Test {
       });
 
       final JoiningCompletionStage assertion =
-         new JoiningCompletionStage(events);
+         new JoiningCompletionStage(assertions);
       assertion.join(2, TimeUnit.SECONDS);
    }
 

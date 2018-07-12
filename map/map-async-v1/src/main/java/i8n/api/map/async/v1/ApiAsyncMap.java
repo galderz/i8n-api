@@ -2,14 +2,14 @@ package i8n.api.map.async.v1;
 
 import i8n.api.common.Api;
 
-public class ApiMap<K, V> implements Api<DummyAsyncMap<K, V>> {
+public class ApiAsyncMap<K, V> implements Api<DummyAsyncMap<K, V>> {
 
-   private static final ApiMap INSTANCE = new ApiMap();
+   private static final ApiAsyncMap INSTANCE = new ApiAsyncMap();
 
-   private ApiMap() {
+   private ApiAsyncMap() {
    }
 
-   public static <K, V> ApiMap<K, V> instance() {
+   public static <K, V> ApiAsyncMap<K, V> instance() {
       return INSTANCE;
    }
 

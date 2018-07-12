@@ -6,6 +6,7 @@ import i8n.api.map.v3.DummyMap;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class MapV3EmbeddedTest {
 
@@ -17,14 +18,14 @@ public class MapV3EmbeddedTest {
 
       map.put(1, "Bulbasaur");
       map.put(4, "Charmander");
-      map.get(1);
-      map.getAndPut(7, "Squirtle");
-      map.compute(3, (k, oldV) -> {
+      assertEquals("Bulbasaur", map.get(1));
+      assertNull(map.getAndPut(7, "Squirtle"));
+      assertEquals("Venusaur", map.compute(3, (k, oldV) -> {
          if (oldV == null)
             return "Venusaur";
 
          return null;
-      });
+      }));
 
       assertEquals(
       "[map-v3-embedded] PUT key=1,value=Bulbasaur\n" +

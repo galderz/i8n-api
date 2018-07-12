@@ -6,6 +6,7 @@ import i8n.api.map.v2.DummyMap;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class AnyMapV2Test {
 
@@ -17,8 +18,8 @@ public class AnyMapV2Test {
 
       map.put(1, "Bulbasaur");
       map.put(4, "Charmander");
-      map.get(1);
-      map.getAndPut(7, "Squirtle");
+      assertEquals("Bulbasaur", map.get(1));
+      assertNull(map.getAndPut(7, "Squirtle"));
 
       assertEquals(
       "[" + map.getName() + "] PUT key=1,value=Bulbasaur\n" +

@@ -7,6 +7,9 @@ import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -18,20 +21,24 @@ import java.util.stream.Collectors;
 public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
    private final Queue<String> queue = new LinkedList<>();
+   private final Map<K, V> data = new HashMap<>();
 
    public CompletionStage<V> get(K key) {
       queue.offer("[map-async-v1-embedded] GET key=" + key);
-      return CompletableFuture.completedFuture(null);
+      return CompletableFuture.completedFuture(data.get(key));
    }
 
    @Override
    public Publisher<V> getMany(Publisher<K> keys) {
+      List<V> vs = new ArrayList<>();
+
       keys.subscribe(new Subscriber<K>() {
          @Override public void onSubscribe(Subscription s) {}
 
          @Override
          public void onNext(K k) {
             queue.offer("[map-async-v1-embedded] GET_MANY key=" + k);
+            vs.add(data.get(k));
          }
 
          @Override public void onError(Throwable t) {}
@@ -42,11 +49,13 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
          }
       });
 
-      return TestPublisher.fromArray();
+      final V[] vsArray = (V[]) vs.toArray();
+      return TestPublisher.fromArray(vsArray);
    }
 
    public CompletionStage<Void> put(K key, V value) {
       queue.offer("[map-async-v1-embedded] PUT key=" + key + ",value=" + value);
+      data.put(key, value);
       return CompletableFuture.completedFuture(null);
    }
 
@@ -59,6 +68,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
          @Override
          public void onNext(Map.Entry<K, V> entry) {
             queue.offer("[map-async-v1-embedded] PUT_MANY entry=" + entry);
+            data.put(entry.getKey(), entry.getValue());
          }
 
          @Override public void onError(Throwable t) {}
