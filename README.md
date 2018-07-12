@@ -42,7 +42,22 @@ That is, they don't want to mix up up sync and async APIs.
 This is why the API is standalone and independent from the sync APIs.
 One example user here would be Vert.x.
 
-TODO
+
+# Design
+
+* APIs are loaded using the service loader pattern which lookup high level APIs, e.g. `v1.ApiMap` or `ApiAsyncMap`.
+
+* It assumes that given a high level API, e.g. `v1.ApiMap`, the user will only load one implementation at the time.
+For example, for `v1.ApiMap`, it would load either the embedded or remote implementation, but not both at the same time.
+
+* There's nothing stopping the user from loading two versions of the same API, e.g. `v1.ApiMap` and `v2.ApiMap`.
+This might not be desirable.
+
+* Loading different APIs should be allowed though. 
+For example, a user should be able to load a map and query API at the same time.
+
+
+# TODO
 
 - [X] Async Map API - CompletionStage
 - [X] Async Map API - Publisher
