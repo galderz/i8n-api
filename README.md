@@ -64,3 +64,4 @@ For example, a user should be able to load a map and query API at the same time.
 - [ ] Rx Map API 
 - [ ] Query API
 - [ ] Counter API
+- [ ] Avoid loading multiple versions of same API
