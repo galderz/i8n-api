@@ -34,13 +34,19 @@ Changing the return value is an incompatible API change, so instead let's move t
 It is designed as embedded-only is because there's no easy way to transform Java lambdas into functions in other languages.
 
 * DummyAsyncMap v1 is a location-independent, async-only API.
-Barring reactivestreams dependency (which is part of Java 9), it has no other dependencies.
+Barring Reactive Streams dependency (which is part of Java 9), it has no other dependencies.
 This means that it offers an async API that works for both operations with single or multiple returns without external dependencies.
 Higher level async-only APIs, such as Rx, would build on top of this API.
 Those users interested in using async APIs are often interested in using them exclusive.
 That is, they don't want to mix up up sync and async APIs.
 This is why the API is standalone and independent from the sync APIs.
 One example user here would be Vert.x.
+
+* DummyRxMap v1 is a location-independent, async-only API.
+It offers an RxJava2 based API which is a higher level async-only API compared with DummyAsyncMap.
+Compared with Reactive Streams, RxJava2 it offers a richer API.
+For example, RxJava2 offers combinators and it's easier to compose with other reactive/async data streams. 
+The DummyRxMap implementations are simply wrappers around the DummyAsyncMap offering little maintenance effort. 
 
 
 # Design
