@@ -1,4 +1,4 @@
-package i8n.api.map.async.v1.impl.embedded;
+package i8n.api.map.async.v1.impl.remote;
 
 import i8n.api.map.async.v1.DummyAsyncMap;
 import i8n.api.map.async.v1.TestPublisher;
