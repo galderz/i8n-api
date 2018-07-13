@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+      <artifactId>i8n-api-parent</artifactId>
+      <groupId>i8n</groupId>
+      <version>1.0-SNAPSHOT</version>
+      <relativePath>../../pom.xml</relativePath>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+
+   <artifactId>i8n-api-map-rx-v1-embedded-impl</artifactId>
+
+   <dependencies>
+      <dependency>
+         <groupId>i8n</groupId>
+         <artifactId>i8n-api-map-rx-v1</artifactId>
+         <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <!-- Builds on top of async map API -->
+      <dependency>
+         <groupId>i8n</groupId>
+         <artifactId>i8n-api-map-async-v1-embedded-impl</artifactId>
+         <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.kohsuke.metainf-services</groupId>
+         <artifactId>metainf-services</artifactId>
+         <version>1.7</version>
+         <optional>true</optional>
+      </dependency>
+   </dependencies>
+
+</project>

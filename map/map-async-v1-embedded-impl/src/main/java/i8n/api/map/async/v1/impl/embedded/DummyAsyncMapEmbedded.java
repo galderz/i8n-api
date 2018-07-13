@@ -23,8 +23,20 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
    private final Queue<String> queue = new LinkedList<>();
    private final Map<K, V> data = new HashMap<>();
 
+   final String name;
+
+   // For service loader
+   public DummyAsyncMapEmbedded() {
+      this.name = "map-async-v1-embedded";
+   }
+
+   // For delegate use
+   public DummyAsyncMapEmbedded(String name) {
+      this.name = name;
+   }
+
    public CompletionStage<V> get(K key) {
-      queue.offer("[map-async-v1-embedded] GET key=" + key);
+      queue.offer(String.format("[%s] GET key=%s", name, key));
       return CompletableFuture.completedFuture(data.get(key));
    }
 
@@ -37,7 +49,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
          @Override
          public void onNext(K k) {
-            queue.offer("[map-async-v1-embedded] GET_MANY key=" + k);
+            queue.offer(String.format("[%s] GET_MANY key=%s", name, k));
             vs.add(data.get(k));
          }
 
@@ -45,7 +57,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
          @Override
          public void onComplete() {
-            queue.offer("[map-async-v1-embedded] GET_MANY complete");
+            queue.offer(String.format("[%s] GET_MANY complete", name));
          }
       });
 
@@ -54,7 +66,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
    }
 
    public CompletionStage<Void> put(K key, V value) {
-      queue.offer("[map-async-v1-embedded] PUT key=" + key + ",value=" + value);
+      queue.offer(String.format("[%s] PUT key=%s,value=%s", name, key, value));
       data.put(key, value);
       return CompletableFuture.completedFuture(null);
    }
@@ -67,7 +79,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
          @Override
          public void onNext(Map.Entry<K, V> entry) {
-            queue.offer("[map-async-v1-embedded] PUT_MANY entry=" + entry);
+            queue.offer(String.format("[%s] PUT_MANY entry=%s", name, entry));
             data.put(entry.getKey(), entry.getValue());
          }
 
@@ -75,7 +87,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
          @Override
          public void onComplete() {
-            queue.offer("[map-async-v1-embedded] PUT_MANY complete");
+            queue.offer(String.format("[%s] PUT_MANY complete", name));
          }
       });
 
@@ -84,7 +96,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
    @Override
    public String getName() {
-      return "map-async-v1-embedded";
+      return name;
    }
 
    @Override
