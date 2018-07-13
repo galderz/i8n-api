@@ -23,51 +23,74 @@ public class DummyAsyncMapRemote<K, V> implements DummyAsyncMap<K, V> {
    private final Queue<String> queue = new LinkedList<>();
    private final Map<K, V> data = new HashMap<>();
 
+   final String name;
+
+   // For service loader
+   @SuppressWarnings("unused")
+   public DummyAsyncMapRemote() {
+      this.name = "map-async-v1-remote";
+   }
+
+   // For delegate use
+   public DummyAsyncMapRemote(String name) {
+      this.name = name;
+   }
+
    public CompletionStage<V> get(K key) {
-      queue.offer("[map-async-v1-remote] GET key=" + key);
+      queue.offer(String.format("[%s] GET key=%s", name, key));
       return CompletableFuture.completedFuture(data.get(key));
    }
 
    @Override
    public Publisher<V> getMany(Publisher<K> keys) {
-      List<V> vs = new ArrayList<>();
+      return subscriber -> {
+         keys.subscribe(new Subscriber<K>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+               s.request(Long.MAX_VALUE);
+               subscriber.onSubscribe(s);
+            }
 
-      keys.subscribe(new Subscriber<K>() {
-         @Override public void onSubscribe(Subscription s) {}
+            @Override
+            public void onNext(K k) {
+               queue.offer(String.format("[%s] GET_MANY key=%s", name, k));
+               final V v = data.get(k);
+               subscriber.onNext(v);
+            }
 
-         @Override
-         public void onNext(K k) {
-            queue.offer("[map-async-v1-remote] GET_MANY key=" + k);
-            vs.add(data.get(k));
-         }
+            @Override
+            public void onError(Throwable t) {
+               subscriber.onError(t);
+            }
 
-         @Override public void onError(Throwable t) {}
-
-         @Override
-         public void onComplete() {
-            queue.offer("[map-async-v1-remote] GET_MANY complete");
-         }
-      });
-
-      final V[] vsArray = (V[]) vs.toArray();
-      return TestPublisher.fromArray(vsArray);
+            @Override
+            public void onComplete() {
+               queue.offer(String.format("[%s] GET_MANY complete", name));
+               subscriber.onComplete();
+            }
+         });
+      };
    }
 
    public CompletionStage<Void> put(K key, V value) {
-      queue.offer("[map-async-v1-remote] PUT key=" + key + ",value=" + value);
+      queue.offer(String.format("[%s] PUT key=%s,value=%s", name, key, value));
       data.put(key, value);
       return CompletableFuture.completedFuture(null);
    }
 
    @Override
    public CompletionStage<Void> putMany(Publisher<Map.Entry<K, V>> pairs) {
+      CompletableFuture<Void> completed = new CompletableFuture<>();
+
       pairs.subscribe(new Subscriber<Map.Entry<K, V>>() {
          @Override
-         public void onSubscribe(Subscription s) {}
+         public void onSubscribe(Subscription s) {
+            s.request(Long.MAX_VALUE);
+         }
 
          @Override
          public void onNext(Map.Entry<K, V> entry) {
-            queue.offer("[map-async-v1-remote] PUT_MANY entry=" + entry);
+            queue.offer(String.format("[%s] PUT_MANY entry=%s", name, entry));
             data.put(entry.getKey(), entry.getValue());
          }
 
@@ -75,16 +98,17 @@ public class DummyAsyncMapRemote<K, V> implements DummyAsyncMap<K, V> {
 
          @Override
          public void onComplete() {
-            queue.offer("[map-async-v1-remote] PUT_MANY complete");
+            queue.offer(String.format("[%s] PUT_MANY complete", name));
+            completed.complete(null);
          }
       });
 
-      return CompletableFuture.completedFuture(null);
+      return completed;
    }
 
    @Override
    public String getName() {
-      return "map-async-v1-remote";
+      return name;
    }
 
    @Override

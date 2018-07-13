@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+      <artifactId>i8-api-use-cases</artifactId>
+      <groupId>i8n</groupId>
+      <version>1.0-SNAPSHOT</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+
+   <artifactId>i8-api-use-case-any-map-rx-v1-remote</artifactId>
+
+   <description>
+   This use case represents a user that wants to interact with Infinispan using version 1 of the Rx Map API.
+   It provides embedded implementation as dependency to run it in-memory.
+   The user might want to use remote implementation with the same API.
+   That can be achieved simply by changing the dependency, no further changes should be required.
+   </description>
+
+   <dependencies>
+      <dependency>
+         <groupId>i8n</groupId>
+         <artifactId>i8-api-use-case-any-map-rx-v1</artifactId>
+         <version>1.0-SNAPSHOT</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>i8n</groupId>
+         <artifactId>i8n-api-map-rx-v1-embedded-impl</artifactId>
+         <version>1.0-SNAPSHOT</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.0</version>
+            <configuration>
+               <dependenciesToScan>
+                  <dependency>i8n:i8-api-use-case-any-map-rx-v1</dependency>
+               </dependenciesToScan>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>

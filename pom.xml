@@ -23,6 +23,7 @@
       <module>map/map-common</module>
       <module>map/map-rx-v1</module>
       <module>map/map-rx-v1-embedded-impl</module>
+      <module>map/map-rx-v1-remote-impl</module>
       <module>map/map-v1</module>
       <module>map/map-v1-embedded-impl</module>
       <module>map/map-v1-remote-impl</module>

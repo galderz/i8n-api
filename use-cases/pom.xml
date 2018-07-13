@@ -18,6 +18,7 @@
       <module>any-map-async-v1-remote</module>
       <module>any-map-rx-v1</module>
       <module>any-map-rx-v1-embedded</module>
+      <module>any-map-rx-v1-remote</module>
       <module>any-map-v1</module>
       <module>any-map-v1-embedded</module>
       <module>any-map-v1-remote</module>
