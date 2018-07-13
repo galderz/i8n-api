@@ -26,6 +26,7 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
    final String name;
 
    // For service loader
+   @SuppressWarnings("unused")
    public DummyAsyncMapEmbedded() {
       this.name = "map-async-v1-embedded";
    }
@@ -42,27 +43,33 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
    @Override
    public Publisher<V> getMany(Publisher<K> keys) {
-      List<V> vs = new ArrayList<>();
+      return subscriber -> {
+         keys.subscribe(new Subscriber<K>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+               s.request(Long.MAX_VALUE);
+               subscriber.onSubscribe(s);
+            }
 
-      keys.subscribe(new Subscriber<K>() {
-         @Override public void onSubscribe(Subscription s) {}
+            @Override
+            public void onNext(K k) {
+               queue.offer(String.format("[%s] GET_MANY key=%s", name, k));
+               final V v = data.get(k);
+               subscriber.onNext(v);
+            }
 
-         @Override
-         public void onNext(K k) {
-            queue.offer(String.format("[%s] GET_MANY key=%s", name, k));
-            vs.add(data.get(k));
-         }
+            @Override
+            public void onError(Throwable t) {
+               subscriber.onError(t);
+            }
 
-         @Override public void onError(Throwable t) {}
-
-         @Override
-         public void onComplete() {
-            queue.offer(String.format("[%s] GET_MANY complete", name));
-         }
-      });
-
-      final V[] vsArray = (V[]) vs.toArray();
-      return TestPublisher.fromArray(vsArray);
+            @Override
+            public void onComplete() {
+               queue.offer(String.format("[%s] GET_MANY complete", name));
+               subscriber.onComplete();
+            }
+         });
+      };
    }
 
    public CompletionStage<Void> put(K key, V value) {
@@ -73,9 +80,13 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
    @Override
    public CompletionStage<Void> putMany(Publisher<Map.Entry<K, V>> pairs) {
+      CompletableFuture<Void> completed = new CompletableFuture<>();
+
       pairs.subscribe(new Subscriber<Map.Entry<K, V>>() {
          @Override
-         public void onSubscribe(Subscription s) {}
+         public void onSubscribe(Subscription s) {
+            s.request(Long.MAX_VALUE);
+         }
 
          @Override
          public void onNext(Map.Entry<K, V> entry) {
@@ -88,10 +99,11 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
          @Override
          public void onComplete() {
             queue.offer(String.format("[%s] PUT_MANY complete", name));
+            completed.complete(null);
          }
       });
 
-      return CompletableFuture.completedFuture(null);
+      return completed;
    }
 
    @Override
