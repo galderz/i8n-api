@@ -67,8 +67,14 @@ For example, a user should be able to load a map and query API at the same time.
 
 - [X] Async Map API - CompletionStage
 - [X] Async Map API - Publisher
-- [ ] Rx Map API 
+- [X] Rx Map API 
 - [ ] Query API
-- [ ] Counter API
+- [ ] Query Async API
+- [ ] Query Rx API
 - [ ] Avoid loading multiple versions of same API
+- [ ] Counter API
+- [ ] MultiMap API
+- [ ] Lock API
 - [ ] Listeners
+- [ ] Management/Monitoring APIs
+- [ ] Lifecycle APIs
