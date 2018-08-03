@@ -54,6 +54,11 @@ This is an demo sync API for executing queries and retrieving results.
 
 # Design
 
+These are the design principles guiding this API design:
+
+* An API will never be perfect. 
+So the dummy APIs offered in this repo support versioning from the start to make it easy to evolve them over time.
+
 * APIs are loaded using the service loader pattern which lookup high level APIs, e.g. `v1.ApiMap` or `ApiAsyncMap`.
 
 * It assumes that given a high level API, e.g. `v1.ApiMap`, the user will only load one implementation at the time.
@@ -64,6 +69,23 @@ This might not be desirable.
 
 * Loading different APIs should be allowed though. 
 For example, a user should be able to load a map and query API at the same time.
+
+
+# Requirements
+
+These are requirements to be met by APIs:
+
+* Each high level data structure (e.g. map, search, ...etc) should provide sync, dependency-free async and Reactive (Rx) APIs.
+
+* All Rx APIs should build on top of dependency-free async APIs.
+This makes Rx APIs simple facades that are easier to integrate with other async APIs and offer more capabilities.  
+
+* All APIs should strive to offer embedded and remote implementations.
+In some cases, remote implementations might not be doable due to lack of direct cross-platform representations, e.g. Java lambdas. 
+In such cases, to achieve location-independent APIs might require finding ways to define abstractions in a platform independent way.
+  * For example, a possible cross-platform equivalent of Java lambdas could be Javascript functions or lambdas?
+  * Or alternatively, lambdas could be executed client-side rather than server side.
+  However, this would require client-side locking (or transactions), if the lambdas belong to atomic operations. 
 
 
 # TODO
