@@ -29,6 +29,7 @@ This was an actual mistake we made in the original Infinispan API.
 We want the users to continue using `put()` since that's the most idiomatic way to simply store a value.
 This is better than getting those users to use a different method that stores a value but does not return previous value.
 Changing the return value is an incompatible API change, so instead let's move those users to a new API version.
+This API also adds ability to process all values stored in the map using Java Stream API.
 
 * DummyMap v3 is an embedded-only API that offers a extra Java lambda-based operation.
 It is designed as embedded-only is because there's no easy way to transform Java lambdas into functions in other languages.

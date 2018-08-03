@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @MetaInfServices
 public class DummyMapEmbedded<K, V> implements DummyMap<K, V> {
@@ -29,6 +30,12 @@ public class DummyMapEmbedded<K, V> implements DummyMap<K, V> {
    public V getAndPut(K key, V value) {
       queue.offer("[map-v2-embedded] GET_PUT key=" + key + ",value=" + value);
       return data.put(key, value);
+   }
+
+   @Override
+   public Stream<V> values() {
+      queue.offer("[map-v2-embedded] VALUES");
+      return data.values().stream();
    }
 
    @Override
