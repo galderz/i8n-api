@@ -52,6 +52,14 @@ public class AnyMapV2Test {
       Collections.sort(actual);
 
       assertEquals(expected, actual);
+
+      assertEquals(
+         "[" + map.getName() + "] PUT key=2,value=Ivysaur\n" +
+            "[" + map.getName() + "] PUT key=5,value=Charmaleon\n" +
+            "[" + map.getName() + "] PUT key=8,value=Wartotle\n" +
+            "[" + map.getName() + "] VALUES"
+         , map.toString()
+      );
    }
 
 }
