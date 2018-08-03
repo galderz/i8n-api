@@ -48,6 +48,9 @@ Compared with Reactive Streams, RxJava2 it offers a richer API.
 For example, RxJava2 offers combinators and it's easier to compose with other reactive/async data streams. 
 The DummyRxMap implementations are simply wrappers around the DummyAsyncMap offering little maintenance effort. 
 
+* DummySearch v1 is a location-independent, search API.
+This is an demo sync API for executing queries and retrieving results.
+
 
 # Design
 
@@ -68,9 +71,9 @@ For example, a user should be able to load a map and query API at the same time.
 - [X] Async Map API - CompletionStage
 - [X] Async Map API - Publisher
 - [X] Rx Map API 
-- [ ] Query API
-- [ ] Query Async API
-- [ ] Query Rx API
+- [X] Search API
+- [ ] Search Async API
+- [ ] Search Rx API
 - [ ] Avoid loading multiple versions of same API
 - [ ] Counter API
 - [ ] MultiMap API
