@@ -120,3 +120,5 @@ In such cases, to achieve location-independent APIs might require finding ways t
 - [ ] Listeners
 - [ ] Management/Monitoring APIs
 - [ ] Lifecycle APIs
+- [ ] Service loader - load a factory instead of individual API instances.
+So that you can load multiple instances of an API (e.g. cluster functionality).
