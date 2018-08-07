@@ -15,6 +15,8 @@ public interface DummyAsyncMap<K, V> {
 
    CompletionStage<Void> putMany(Publisher<Map.Entry<K, V>> pairs);
 
+   Publisher<V> values();
+
    /**
     * Name of map
     */

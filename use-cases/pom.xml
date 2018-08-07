@@ -28,6 +28,8 @@
       <module>any-search-v1</module>
       <module>any-search-v1-embedded</module>
       <module>any-search-v1-remote</module>
+      <module>any-search-async-v1</module>
+      <module>any-search-async-v1-embedded</module>
       <module>map-v3-embedded</module>
    </modules>
 

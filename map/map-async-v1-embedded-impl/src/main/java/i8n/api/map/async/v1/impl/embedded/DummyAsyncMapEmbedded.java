@@ -9,6 +9,7 @@ import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -104,6 +105,18 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
       });
 
       return completed;
+   }
+
+   @Override
+   public Publisher<V> values() {
+      queue.offer(String.format("[%s] VALUES", name));
+
+      return subscriber -> {
+         for (V v : data.values())
+            subscriber.onNext(v);
+
+         subscriber.onComplete();
+      };
    }
 
    @Override

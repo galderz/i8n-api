@@ -107,6 +107,18 @@ public class DummyAsyncMapRemote<K, V> implements DummyAsyncMap<K, V> {
    }
 
    @Override
+   public Publisher<V> values() {
+      queue.offer(String.format("[%s] VALUES", name));
+
+      return subscriber -> {
+         for (V v : data.values())
+            subscriber.onNext(v);
+
+         subscriber.onComplete();
+      };
+   }
+
+   @Override
    public String getName() {
       return name;
    }
