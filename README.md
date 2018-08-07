@@ -4,6 +4,22 @@ Some rules for consistency:
 
 * API/impl versions, e.g. v1, v2...etc, should only used in artifact and package names, not in class names.
 This does not apply to use case modules.
+Doing so makes it easy for users to switch between different versions of an API just by changing package names.
+This reduces number of changes compared to having versions in class names since class names might be used more wide spread.
+Also, removing versions for class names avoids polluting API descriptions.
+
+* API module names follow this convention:
+
+    [prefix]-[api-name]-[optional async/rx]-v[number]-[embedded/remote]
+
+* Implementation module names follow this convention:
+
+    [prefix]-[api-name]-[optional async/rx]-v[number]-[embedded/remote]-impl
+
+* Package names follow this convention:
+
+    [prefix].api.[api-name].[optional async/rx].v[number].impl.[embedded/remote]
+
 
 Rules for creating a new API version:
 
