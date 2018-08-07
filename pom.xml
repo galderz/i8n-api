@@ -37,6 +37,7 @@
       <module>search/search-v1-remote-impl</module>
       <module>search/search-async-v1</module>
       <module>search/search-async-v1-embedded-impl</module>
+      <module>search/search-async-v1-remote-impl</module>
       <module>use-cases</module>
    </modules>
 

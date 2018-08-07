@@ -111,7 +111,7 @@ In such cases, to achieve location-independent APIs might require finding ways t
 - [X] Async Map API - Publisher
 - [X] Rx Map API 
 - [X] Search API
-- [ ] Search Async API
+- [X] Search Async API
 - [ ] Search Rx API
 - [ ] Avoid loading multiple versions of same API
 - [ ] Counter API
