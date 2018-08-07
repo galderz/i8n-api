@@ -1,5 +1,8 @@
 package i8n.api.search.v1.impl.embedded;
 
+import i8n.api.common.Infinispan;
+import i8n.api.map.v2.ApiMap;
+import i8n.api.map.v2.DummyMap;
 import i8n.api.search.v1.DummySearch;
 import org.kohsuke.MetaInfServices;
 
@@ -13,17 +16,29 @@ import java.util.stream.Collectors;
 public class DummySearchEmbedded implements DummySearch {
 
    private final Queue<String> queue = new LinkedList<>();
-   // TODO search on what? map? multimap? counter?
+
+   // Dummy assumption that the underlying structure is a map,
+   // but could be something else (counter, multi map...etc)
+   private final DummyMap<?, ?> map = Infinispan.get(
+      ApiMap.instance(), new Object()
+   );
+
+   private String name = "search-v1-embedded";
 
    @Override
    public String getName() {
-      return "search-v1-embedded";
+      return name;
    }
 
    @Override
    public DummyQuery createQuery(String queryString) {
-      queue.offer("[search-v1-embedded] CREATE_QUERY query=" + queryString);
+      queue.offer(String.format("[%s] CREATE_QUERY query=%s", name, queryString));
       return new DummyQueryEmbedded(queryString);
+   }
+
+   @Override
+   public <T> T unwrap() {
+      return (T) map;
    }
 
    @Override
@@ -41,8 +56,8 @@ public class DummySearchEmbedded implements DummySearch {
 
       @Override
       public <T> List<T> execute() {
-         queue.offer("[search-v1-embedded] EXEC_QUERY query=" + queryString);
-         return Collections.emptyList();
+         queue.offer(String.format("[%s] EXEC_QUERY query=%s", name, queryString));
+         return (List<T>) map.values().collect(Collectors.toList());
       }
 
    }

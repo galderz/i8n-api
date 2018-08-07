@@ -1,15 +1,17 @@
 package usecase;
 
 import i8n.api.common.Infinispan;
+import i8n.api.map.v2.DummyMap;
 import i8n.api.search.v1.ApiSearch;
 import i8n.api.search.v1.DummySearch;
 import i8n.api.search.v1.DummySearch.DummyQuery;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class AnySearchV1Test {
 
@@ -19,13 +21,33 @@ public class AnySearchV1Test {
          ApiSearch.instance(), new Object()
       );
 
-      final DummyQuery query = search.createQuery("xyz");
-      final List<Object> results = query.execute();
-      assertTrue(results.isEmpty());
+      final DummyMap<Integer, String> map = search.unwrap();
+      map.put(13, "Weedle");
+      map.put(14, "Kakuna");
+      map.put(15, "Beedrill");
+
+      final DummyQuery query = search.createQuery("FROM Pokemon p where p.type == bug");
+
+      final List<String> actual = query.execute();
+      Collections.sort(actual);
+
+      assertEquals(3, actual.size());
+
+      List<String> expected = Arrays.asList("Weedle", "Kakuna", "Beedrill");
+      Collections.sort(expected);
+
+      assertEquals(expected, actual);
 
       assertEquals(
-      "[" + search.getName() + "] CREATE_QUERY query=xyz\n" +
-         "[" + search.getName() + "] EXEC_QUERY query=xyz"
+         "[" + map.getName() + "] PUT key=13,value=Weedle\n" +
+            "[" + map.getName() + "] PUT key=14,value=Kakuna\n" +
+            "[" + map.getName() + "] PUT key=15,value=Beedrill\n" +
+            "[" + map.getName() + "] VALUES"
+         , map.toString()
+      );
+      assertEquals(
+      "[" + search.getName() + "] CREATE_QUERY query=FROM Pokemon p where p.type == bug\n" +
+         "[" + search.getName() + "] EXEC_QUERY query=FROM Pokemon p where p.type == bug"
          , search.toString()
       );
    }

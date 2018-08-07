@@ -1,5 +1,8 @@
 package i8n.api.search.v1.impl.remote;
 
+import i8n.api.common.Infinispan;
+import i8n.api.map.v2.ApiMap;
+import i8n.api.map.v2.DummyMap;
 import i8n.api.search.v1.DummySearch;
 import org.kohsuke.MetaInfServices;
 
@@ -14,15 +17,28 @@ public class DummySearchRemote<K, V> implements DummySearch {
 
    private final Queue<String> queue = new LinkedList<>();
 
+   // Dummy assumption that the underlying structure is a map,
+   // but could be something else (counter, multi map...etc)
+   private final DummyMap<?, ?> map = Infinispan.get(
+      ApiMap.instance(), new Object()
+   );
+
+   private String name = "search-v1-remote";
+
    @Override
    public String getName() {
-      return "search-v1-remote";
+      return name;
    }
 
    @Override
    public DummyQuery createQuery(String queryString) {
-      queue.offer("[search-v1-remote] CREATE_QUERY query=" + queryString);
+      queue.offer(String.format("[%s] CREATE_QUERY query=%s", name, queryString));
       return new DummyQueryRemote(queryString);
+   }
+
+   @Override
+   public <T> T unwrap() {
+      return (T) map;
    }
 
    @Override
@@ -40,8 +56,8 @@ public class DummySearchRemote<K, V> implements DummySearch {
 
       @Override
       public <T> List<T> execute() {
-         queue.offer("[search-v1-remote] EXEC_QUERY query=" + queryString);
-         return Collections.emptyList();
+         queue.offer(String.format("[%s] EXEC_QUERY query=%s", name, queryString));
+         return (List<T>) map.values().collect(Collectors.toList());
       }
 
    }
