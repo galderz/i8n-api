@@ -1,15 +1,12 @@
 package i8n.api.map.async.v1.impl.remote;
 
 import i8n.api.map.async.v1.DummyAsyncMap;
-import i8n.api.map.async.v1.TestPublisher;
 import org.kohsuke.MetaInfServices;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;

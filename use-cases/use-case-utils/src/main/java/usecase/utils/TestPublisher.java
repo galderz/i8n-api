@@ -1,4 +1,4 @@
-package i8n.api.map.async.v1;
+package usecase.utils;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;

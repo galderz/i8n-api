@@ -4,17 +4,12 @@ import i8n.api.common.Infinispan;
 import i8n.api.search.async.v1.ApiAsyncSearch;
 import i8n.api.search.async.v1.DummyAsyncSearch;
 import i8n.api.search.async.v1.DummyAsyncSearch.DummyAsyncQuery;
-import i8n.api.search.async.v1.TestSubscriber;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import usecase.utils.TestSubscriber;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class AnyAsyncSearchV1Test {
 

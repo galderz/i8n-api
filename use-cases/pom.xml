@@ -32,6 +32,7 @@
       <module>any-search-async-v1-embedded</module>
       <module>any-search-async-v1-remote</module>
       <module>map-v3-embedded</module>
+      <module>use-case-utils</module>
    </modules>
 
 </project>

@@ -1,4 +1,4 @@
-package i8n.api.search.async.v1;
+package usecase.utils;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

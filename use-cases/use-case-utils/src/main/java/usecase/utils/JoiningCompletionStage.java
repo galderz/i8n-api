@@ -1,4 +1,4 @@
-package i8n.api.search.async.v1;
+package usecase.utils;
 
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
@@ -6,7 +6,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-// TODO Temporary location, it should live somewhere else
 public class JoiningCompletionStage {
 
    private final CountDownLatch latch = new CountDownLatch(1);

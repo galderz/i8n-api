@@ -3,15 +3,14 @@ package usecase;
 import i8n.api.common.Infinispan;
 import i8n.api.map.async.v1.ApiAsyncMap;
 import i8n.api.map.async.v1.DummyAsyncMap;
-import i8n.api.map.async.v1.JoiningCompletionStage;
-import i8n.api.map.async.v1.TestPublisher;
-import i8n.api.map.async.v1.TestSubscriber;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
+import usecase.utils.JoiningCompletionStage;
+import usecase.utils.TestPublisher;
+import usecase.utils.TestSubscriber;
 
 import java.util.AbstractMap;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;

@@ -1,19 +1,11 @@
 package i8n.api.search.async.v1.impl.embedded;
 
 import i8n.api.search.async.v1.DummyAsyncSearch;
-import i8n.api.search.async.v1.TestPublisher;
 import org.kohsuke.MetaInfServices;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
