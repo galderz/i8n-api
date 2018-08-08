@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-@MetaInfServices
-public class DummyMapEmbedded<K, V> implements DummyMap<K, V> {
+public final class DummyMapEmbedded<K, V> implements DummyMap<K, V> {
 
    private final Queue<String> queue = new LinkedList<>();
    private final Map<K, V> data = new HashMap<>();
@@ -33,6 +32,16 @@ public class DummyMapEmbedded<K, V> implements DummyMap<K, V> {
    @Override
    public String toString() {
       return queue.stream().collect(Collectors.joining("\n"));
+   }
+
+   @MetaInfServices
+   public final static class FactoryImpl<K, V> implements DummyMap.Factory<K, V> {
+
+      @Override
+      public DummyMap<K, V> apply(Object o) {
+         return new DummyMapEmbedded<>();
+      }
+
    }
 
 }

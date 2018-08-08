@@ -6,18 +6,14 @@ import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.stream.Collectors;
 
-@MetaInfServices
 public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
 
    private final Queue<String> queue = new LinkedList<>();
@@ -126,6 +122,16 @@ public class DummyAsyncMapEmbedded<K, V> implements DummyAsyncMap<K, V> {
    @Override
    public String toString() {
       return queue.stream().collect(Collectors.joining("\n"));
+   }
+
+   @MetaInfServices
+   public final static class FactoryImpl<K, V> implements DummyAsyncMap.Factory<K, V> {
+
+      @Override
+      public DummyAsyncMap<K, V> apply(Object o) {
+         return new DummyAsyncMapEmbedded<>();
+      }
+
    }
 
 }

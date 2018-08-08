@@ -5,6 +5,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 
 import java.util.Map;
+import java.util.function.Function;
 
 public interface DummyRxMap<K, V> {
 
@@ -23,5 +24,10 @@ public interface DummyRxMap<K, V> {
     * Name of map
     */
    String getName();
+
+   /**
+    * Factory
+    */
+   interface Factory<K, V> extends Function<Object, DummyRxMap<K, V>> {}
 
 }

@@ -4,6 +4,7 @@ import org.reactivestreams.Publisher;
 
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 
 public interface DummyAsyncMap<K, V> {
 
@@ -21,5 +22,10 @@ public interface DummyAsyncMap<K, V> {
     * Name of map
     */
    String getName();
+
+   /**
+    * Factory
+    */
+   interface Factory<K, V> extends Function<Object, DummyAsyncMap<K, V>> {}
 
 }

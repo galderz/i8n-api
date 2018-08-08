@@ -2,6 +2,8 @@ package i8n.api.search.async.v1;
 
 import i8n.api.common.Api;
 
+import java.util.function.Function;
+
 public class ApiAsyncSearch implements Api<DummyAsyncSearch> {
 
    private static final ApiAsyncSearch INSTANCE = new ApiAsyncSearch();
@@ -19,8 +21,8 @@ public class ApiAsyncSearch implements Api<DummyAsyncSearch> {
    }
 
    @Override
-   public <T> Class<T> classApi() {
-      return (Class<T>) DummyAsyncSearch.class;
+   public <F extends Function<Object, DummyAsyncSearch>> Class<F> classApi() {
+      return (Class) DummyAsyncSearch.Factory.class;
    }
 
 }

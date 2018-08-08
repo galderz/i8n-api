@@ -2,6 +2,8 @@ package i8n.api.search.async.v1;
 
 import org.reactivestreams.Publisher;
 
+import java.util.function.Function;
+
 public interface DummyAsyncSearch {
 
    String getName();
@@ -13,5 +15,10 @@ public interface DummyAsyncSearch {
       <T> Publisher<T> execute();
 
    }
+
+   /**
+    * Factory
+    */
+   interface Factory extends Function<Object, DummyAsyncSearch> {}
 
 }

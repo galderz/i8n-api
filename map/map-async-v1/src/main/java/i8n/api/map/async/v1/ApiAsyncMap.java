@@ -2,6 +2,8 @@ package i8n.api.map.async.v1;
 
 import i8n.api.common.Api;
 
+import java.util.function.Function;
+
 public class ApiAsyncMap<K, V> implements Api<DummyAsyncMap<K, V>> {
 
    private static final ApiAsyncMap INSTANCE = new ApiAsyncMap();
@@ -19,8 +21,8 @@ public class ApiAsyncMap<K, V> implements Api<DummyAsyncMap<K, V>> {
    }
 
    @Override
-   public <T> Class<T> classApi() {
-      return (Class<T>) DummyAsyncMap.class;
+   public <F extends Function<Object, DummyAsyncMap<K, V>>> Class<F> classApi() {
+      return (Class) DummyAsyncMap.Factory.class;
    }
 
 }

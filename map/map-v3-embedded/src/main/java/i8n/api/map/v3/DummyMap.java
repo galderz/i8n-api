@@ -1,6 +1,7 @@
 package i8n.api.map.v3;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public interface DummyMap<K, V> {
 
@@ -24,5 +25,10 @@ public interface DummyMap<K, V> {
       K key
       , BiFunction<? super K, ? super V, ? extends V> remappingFunction
    );
+
+   /**
+    * Factory
+    */
+   interface Factory<K, V> extends Function<Object, DummyMap<K, V>> {}
 
 }

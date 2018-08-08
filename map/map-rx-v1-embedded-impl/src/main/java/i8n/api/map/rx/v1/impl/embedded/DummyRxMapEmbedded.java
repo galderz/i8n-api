@@ -11,7 +11,6 @@ import org.kohsuke.MetaInfServices;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
-@MetaInfServices
 public class DummyRxMapEmbedded<K, V> implements DummyRxMap<K, V> {
 
    final DummyAsyncMap<K, V> asyncMap = new DummyAsyncMapEmbedded<>("map-rx-v1-embedded");
@@ -76,6 +75,16 @@ public class DummyRxMapEmbedded<K, V> implements DummyRxMap<K, V> {
    @Override
    public String toString() {
       return asyncMap.toString();
+   }
+
+   @MetaInfServices
+   public final static class FactoryImpl<K, V> implements DummyRxMap.Factory<K, V> {
+
+      @Override
+      public DummyRxMap<K, V> apply(Object o) {
+         return new DummyRxMapEmbedded<>();
+      }
+
    }
 
 }

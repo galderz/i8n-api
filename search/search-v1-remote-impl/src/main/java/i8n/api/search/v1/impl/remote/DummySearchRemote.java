@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-@MetaInfServices
 public class DummySearchRemote<K, V> implements DummySearch {
 
    private final Queue<String> queue = new LinkedList<>();
@@ -58,6 +57,16 @@ public class DummySearchRemote<K, V> implements DummySearch {
       public <T> List<T> execute() {
          queue.offer(String.format("[%s] EXEC_QUERY query=%s", name, queryString));
          return (List<T>) map.values().collect(Collectors.toList());
+      }
+
+   }
+
+   @MetaInfServices
+   public final static class FactoryImpl implements DummySearch.Factory {
+
+      @Override
+      public DummySearch apply(Object o) {
+         return new DummySearchRemote();
       }
 
    }

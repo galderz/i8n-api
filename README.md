@@ -107,11 +107,6 @@ In such cases, to achieve location-independent APIs might require finding ways t
 
 # TODO
 
-- [X] Async Map API - CompletionStage
-- [X] Async Map API - Publisher
-- [X] Rx Map API 
-- [X] Search API
-- [X] Search Async API
 - [ ] Search Rx API
 - [ ] Avoid loading multiple versions of same API
 - [ ] Counter API
@@ -120,5 +115,10 @@ In such cases, to achieve location-independent APIs might require finding ways t
 - [ ] Listeners
 - [ ] Management/Monitoring APIs
 - [ ] Lifecycle APIs
-- [ ] Service loader - load a factory instead of individual API instances.
+- [X] Service loader - load a factory instead of individual API instances.
 So that you can load multiple instances of an API (e.g. cluster functionality).
+- [X] Search API
+- [X] Search Async API
+- [X] Rx Map API 
+- [X] Async Map API - CompletionStage
+- [X] Async Map API - Publisher

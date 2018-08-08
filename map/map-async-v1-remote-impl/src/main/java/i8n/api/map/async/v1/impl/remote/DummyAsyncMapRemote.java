@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-@MetaInfServices
 public class DummyAsyncMapRemote<K, V> implements DummyAsyncMap<K, V> {
 
    private final Queue<String> queue = new LinkedList<>();
@@ -123,6 +122,16 @@ public class DummyAsyncMapRemote<K, V> implements DummyAsyncMap<K, V> {
    @Override
    public String toString() {
       return queue.stream().collect(Collectors.joining("\n"));
+   }
+
+   @MetaInfServices
+   public final static class FactoryImpl<K, V> implements DummyAsyncMap.Factory<K, V> {
+
+      @Override
+      public DummyAsyncMap<K, V> apply(Object o) {
+         return new DummyAsyncMapRemote<>();
+      }
+
    }
 
 }

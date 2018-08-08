@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-@MetaInfServices
 public class DummyAsyncSearchEmbedded implements DummyAsyncSearch {
 
    private final Queue<String> queue = new LinkedList<>();
@@ -59,6 +58,16 @@ public class DummyAsyncSearchEmbedded implements DummyAsyncSearch {
    @Override
    public String toString() {
       return queue.stream().collect(Collectors.joining("\n"));
+   }
+
+   @MetaInfServices
+   public final static class FactoryImpl implements DummyAsyncSearch.Factory {
+
+      @Override
+      public DummyAsyncSearch apply(Object o) {
+         return new DummyAsyncSearchEmbedded();
+      }
+
    }
 
 }

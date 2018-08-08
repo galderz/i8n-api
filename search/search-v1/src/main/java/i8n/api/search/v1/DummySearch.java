@@ -1,6 +1,7 @@
 package i8n.api.search.v1;
 
 import java.util.List;
+import java.util.function.Function;
 
 public interface DummySearch {
 
@@ -18,5 +19,10 @@ public interface DummySearch {
       <T> List<T> execute();
 
    }
+
+   /**
+    * Factory
+    */
+   interface Factory extends Function<Object, DummySearch> {}
 
 }

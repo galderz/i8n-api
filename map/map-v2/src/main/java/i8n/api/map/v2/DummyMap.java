@@ -1,5 +1,6 @@
 package i8n.api.map.v2;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public interface DummyMap<K, V> {
@@ -25,5 +26,10 @@ public interface DummyMap<K, V> {
     * Name of map
     */
    String getName();
+
+   /**
+    * Factory
+    */
+   interface Factory<K, V> extends Function<Object, DummyMap<K, V>> {}
 
 }
