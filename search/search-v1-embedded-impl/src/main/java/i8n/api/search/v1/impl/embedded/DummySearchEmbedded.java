@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DummySearchEmbedded implements DummySearch {
 
@@ -54,9 +55,9 @@ public class DummySearchEmbedded implements DummySearch {
       }
 
       @Override
-      public <T> List<T> execute() {
+      public <T> Stream<T> execute() {
          queue.offer(String.format("[%s] EXEC_QUERY query=%s", name, queryString));
-         return (List<T>) map.values().collect(Collectors.toList());
+         return (Stream<T>) map.values();
       }
 
    }

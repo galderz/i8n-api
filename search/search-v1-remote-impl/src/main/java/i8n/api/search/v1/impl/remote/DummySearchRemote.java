@@ -6,11 +6,11 @@ import i8n.api.map.v2.DummyMap;
 import i8n.api.search.v1.DummySearch;
 import org.kohsuke.MetaInfServices;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DummySearchRemote<K, V> implements DummySearch {
 
@@ -54,9 +54,9 @@ public class DummySearchRemote<K, V> implements DummySearch {
       }
 
       @Override
-      public <T> List<T> execute() {
+      public <T> Stream<T> execute() {
          queue.offer(String.format("[%s] EXEC_QUERY query=%s", name, queryString));
-         return (List<T>) map.values().collect(Collectors.toList());
+         return (Stream<T>) map.values();
       }
 
    }

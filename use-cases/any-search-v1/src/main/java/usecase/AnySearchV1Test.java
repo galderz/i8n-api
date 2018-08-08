@@ -10,6 +10,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,15 +30,15 @@ public class AnySearchV1Test {
 
       final DummyQuery query = search.createQuery("FROM Pokemon p where p.type == bug");
 
-      final List<String> actual = query.execute();
-      Collections.sort(actual);
+      final List<String> actualList =
+         query.<String>execute().sorted().collect(Collectors.toList());
 
-      assertEquals(3, actual.size());
+      assertEquals(3, actualList.size());
 
       List<String> expected = Arrays.asList("Weedle", "Kakuna", "Beedrill");
       Collections.sort(expected);
 
-      assertEquals(expected, actual);
+      assertEquals(expected, actualList);
 
       assertEquals(
          "[" + map.getName() + "] PUT key=13,value=Weedle\n" +

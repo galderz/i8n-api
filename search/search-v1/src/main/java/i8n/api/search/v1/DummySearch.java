@@ -1,7 +1,7 @@
 package i8n.api.search.v1;
 
-import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public interface DummySearch {
 
@@ -16,7 +16,7 @@ public interface DummySearch {
 
    interface DummyQuery {
 
-      <T> List<T> execute();
+      <T> Stream<T> execute();
 
    }
 
